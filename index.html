@@ -14,7 +14,7 @@
     <style>
         /* --- CSS Variables --- */
         :root {
-            /* Brand Colors from Logo/Background */
+            /* Brand Colors extracted from your images */
             --primary-color: #00E5FF; /* Neon Cyan/Teal */
             --secondary-color: #7C4DFF; /* Deep Purple */
             --bg-dark: #0a0a12; /* Almost Black */
@@ -88,17 +88,6 @@
             box-shadow: 0 6px 20px rgba(0, 229, 255, 0.5);
         }
 
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary-color);
-            color: var(--bg-dark);
-        }
-
         .section-padding {
             padding: 8rem 0;
         }
@@ -156,6 +145,7 @@
             min-height: 700px;
             display: flex;
             align-items: center;
+            /* Fixed: Direct Link to Background Image */
             background-image: url('https://i.imgur.com/4YTrGjt.jpeg');
             background-size: cover;
             background-position: center;
@@ -361,6 +351,7 @@
             background: var(--text-light);
             color: var(--bg-dark);
             font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
             transition: all 0.3s ease;
         }
         
@@ -452,7 +443,7 @@
         <div class="container">
             <div class="text-center fade-in-up">
                 <h2>Features Designed for <span class="text-gradient">Growth</span></h2>
-                <p style="color: var(--text-muted); max-width: 600px;">A powerful toolkit to connect you with the right people and keep you accountable.</p>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">A powerful toolkit to connect you with the right people and keep you accountable.</p>
             </div>
 
             <div class="features-grid">
@@ -567,7 +558,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             const fadeElements = document.querySelectorAll('.fade-in-up');
 
-            function check Fade() {
+            function checkFade() {
                 fadeElements.forEach(element => {
                     const elementTop = element.getBoundingClientRect().top;
                     const windowHeight = window.innerHeight;
