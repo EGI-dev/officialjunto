@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Junto | Keep It Spontaneous</title>
     
-    <link rel="icon" href="https://imgur.com/undefined">
+    <link rel="icon" href="https://i.imgur.com/IFGgKEE.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- CSS Reset & Variables --- */
         :root {
-            --bg-color: #0f0f0f;
+            --bg-color: #050505;
+            --card-bg: #141414;
             --text-color: #ffffff;
-            --accent-color: #ff6b35; 
-            --secondary-bg: #1a1a1a;
+            --accent-gradient: linear-gradient(135deg, #FF8C42 0%, #FF5A1F 100%);
+            --text-gradient: linear-gradient(90deg, #ffffff 0%, #a1a1a1 100%);
             --gray-text: #a1a1a1;
-            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --border-color: #333;
+            --font-main: 'Inter', sans-serif;
+            --nav-height: 80px;
         }
 
         * {
@@ -30,88 +37,132 @@
             font-family: var(--font-main);
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
+        img { max-width: 100%; display: block; }
 
         /* --- Layout Utilities --- */
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         section {
-            padding: 80px 0;
+            padding: 100px 0;
+            position: relative;
         }
 
         h1, h2, h3 {
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.1;
             margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #fff, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2.5rem;
         }
 
         p {
             color: var(--gray-text);
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            font-size: 1.125rem;
+            font-weight: 300;
         }
 
+        /* --- Buttons --- */
         .btn {
             display: inline-block;
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            padding: 12px 30px;
+            background: #fff;
+            color: #000;
+            padding: 14px 32px;
             border-radius: 50px;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
-            border: 2px solid var(--text-color);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
-            background-color: transparent;
-            color: var(--text-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 20px rgba(255, 90, 31, 0.3);
         }
 
         .btn-outline {
-            background-color: transparent;
-            color: var(--text-color);
+            background: transparent;
+            color: #fff;
+            border: 1px solid #444;
         }
 
         .btn-outline:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            border-color: var(--text-color);
+            border-color: #fff;
+            background: rgba(255,255,255,0.05);
         }
 
-        /* --- Navigation --- */
+        /* --- Navigation (Glassmorphism) --- */
         nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            position: absolute;
-            width: 100%;
-            top: 0;
-            z-index: 10;
         }
 
-        /* Updated Logo Styles */
         .nav-logo-img {
-            height: 50px; /* Adjust height to fit navbar */
+            height: 40px; 
             width: auto;
-            object-fit: contain;
-            display: block;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 32px;
         }
 
-        .nav-links a:hover { color: var(--accent-color); }
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #ccc;
+        }
+
+        .nav-links a:hover { color: #fff; }
 
         /* --- Hero Section --- */
         .hero {
@@ -119,68 +170,81 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding-top: 100px; /* Added extra padding for navbar clearance */
+            padding-top: var(--nav-height);
+            overflow: hidden;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
         }
 
         .hero-content {
-            max-width: 800px;
+            z-index: 2;
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #fff, #a1a1a1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-        }
-
-        .hero-image {
-            margin-top: 50px;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* --- Features Sections --- */
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .feature:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        .feature-text {
-            flex: 1;
-        }
-
-        .feature-img {
-            flex: 1;
+        .hero-image-wrapper {
+            position: relative;
             display: flex;
             justify-content: center;
         }
 
-        .feature-img img {
-            max-width: 100%;
-            max-height: 500px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        .hero-image-wrapper img {
+            max-height: 600px;
+            filter: drop-shadow(0 0 40px rgba(255, 90, 31, 0.15));
+            animation: float 6s ease-in-out infinite;
         }
 
-        /* --- Privacy & Mission --- */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- Features Section --- */
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            margin-bottom: 120px;
+        }
+
+        .feature-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .feature-text h2 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .feature-text h2 span {
+            color: #FF5A1F; /* Accent Color */
+        }
+
+        .feature-visual {
+            flex: 1;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .feature-visual img {
+             /* Placeholder for UI elements */
+             border-radius: 12px;
+             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* --- Mission (Text Only) --- */
         .mission {
-            background-color: var(--secondary-bg);
             text-align: center;
+            background: linear-gradient(180deg, var(--bg-color) 0%, #111 100%);
         }
 
         .mission-content {
@@ -188,95 +252,124 @@
             margin: 0 auto;
         }
 
-        /* --- Highlights --- */
-        .highlights h2 { color: var(--accent-color); }
-
-        /* --- Team Section --- */
+        /* --- Team --- */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 50px;
         }
 
-        .team-member {
-            background: var(--secondary-bg);
-            padding: 20px;
-            border-radius: 15px;
+        .team-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #222;
             text-align: center;
+            transition: 0.3s;
         }
 
-        .team-photo {
-            width: 100px;
-            height: 100px;
-            background-color: #333;
+        .team-card:hover {
+            border-color: #444;
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            background: #333;
             border-radius: 50%;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
         }
 
         /* --- Careers --- */
-        .careers {
-            background-color: var(--secondary-bg);
-        }
-        
         .job-list {
+            display: grid;
+            gap: 20px;
             margin-top: 40px;
         }
 
         .job-card {
-            background: var(--bg-color);
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            border: 1px solid #333;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #222;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .job-card h3 { margin-bottom: 10px; }
-        .job-card ul { list-style: disc; margin-left: 20px; color: var(--gray-text); margin-bottom: 20px; }
+        .job-card:hover {
+            border-color: #FF5A1F;
+        }
+
+        .job-header {
+            margin-bottom: 15px;
+        }
+
+        .job-card h3 { font-size: 1.4rem; color: #fff; }
+        .job-card ul { list-style-position: inside; color: var(--gray-text); font-size: 0.95rem; margin-bottom: 25px; }
 
         /* --- FAQ --- */
         .faq-item {
-            border-bottom: 1px solid #333;
-            padding: 20px 0;
+            border-bottom: 1px solid #222;
+            padding: 24px 0;
         }
         .faq-question {
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
             color: #fff;
+            margin-bottom: 8px;
         }
 
         /* --- Footer --- */
         footer {
             text-align: center;
-            padding: 50px 0;
-            border-top: 1px solid #333;
-            margin-top: 50px;
+            padding: 80px 0;
+            border-top: 1px solid #222;
+            background: #0a0a0a;
+        }
+
+        .waitlist-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .waitlist-form input {
-            padding: 15px;
+            padding: 16px 24px;
             border-radius: 50px;
-            border: none;
-            width: 300px;
-            margin-right: 10px;
+            border: 1px solid #333;
+            background: #111;
+            color: #fff;
+            width: 320px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .waitlist-form input:focus {
+            border-color: #FF5A1F;
         }
 
         /* --- Mobile Responsive --- */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .feature { flex-direction: column !important; text-align: center; }
-            .nav-links { display: none; } 
-            .waitlist-form input { width: 100%; margin-bottom: 10px; }
+            h1 { font-size: 2.5rem; }
+            .hero-layout { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .feature-row { flex-direction: column !important; gap: 40px; text-align: center; }
+            .nav-links { display: none; } /* Hidden for simplicity */
+            .waitlist-form { flex-direction: column; align-items: center; }
+            .waitlist-form input { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <nav>
+    <nav>
+        <div class="nav-container">
             <a href="#">
-                <img src="https://imgur.com/undefined" alt="Junto Logo" class="nav-logo-img">
+                <img src="https://i.imgur.com/IFGgKEE.png" alt="Junto Logo" class="nav-logo-img">
             </a>
             
             <div class="nav-links">
@@ -285,163 +378,164 @@
                 <a href="#careers">Careers</a>
                 <a href="#faq">FAQ</a>
             </div>
-            <a href="#waitlist" class="btn">Join Waitlist</a>
-        </nav>
-    </div>
+            <a href="#waitlist" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Join Waitlist</a>
+        </div>
+    </nav>
 
     <header class="hero container">
-        <div class="hero-content">
-            <h1>Ready to Keep It Spontaneous?</h1>
-            <p>Junto helps you seize the opportunity to meet friends nearby. You're always one notification away from a great time.</p>
-            <a href="#waitlist" class="btn">Join the Community</a>
-            <br>
-            <img src="https://placehold.co/350x700/1a1a1a/FFF?text=App+Screenshot" alt="Junto App Interface" class="hero-image">
+        <div class="hero-layout">
+            <div class="hero-content">
+                <h1>Ready to Keep It Spontaneous?</h1>
+                <p>Junto helps you seize the opportunity to meet friends nearby. You're always one notification away from a great time.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
+                    <a href="#features" class="btn btn-outline">How it works</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="https://i.imgur.com/Or8WuLI.png" alt="Junto App Interface">
+            </div>
         </div>
     </header>
 
     <section id="features" class="container">
-        <div class="feature">
+        
+        <div class="feature-row">
             <div class="feature-text">
-                <h2>Your Circles, Your Rules.</h2>
-                [cite_start]<p>Create custom circles for different groups of friends and set personalized notifications based on what you want[cite: 95].</p>
-                [cite_start]<p>Whether it's your gym buddy or your favorite crew for happy hour, choose to get notified based on interests or when they're at specific venues you love[cite: 96].</p>
+                <h2>Your Circles, <span>Your Rules.</span></h2>
+                <p>Create custom circles for different groups of friends and set personalized notifications based on what you want. Whether it's your gym buddy or your happy hour crew.</p>
             </div>
-            <div class="feature-img">
-                <img src="https://placehold.co/400x800/1a1a1a/FFF?text=Circles+UI" alt="Circles Feature">
+            <div class="feature-visual">
+                <img src="https://placehold.co/300x600/1a1a1a/FFF?text=Circles+UI" alt="Circles Feature">
             </div>
         </div>
-    </section>
 
-    <section class="container">
-        <div class="feature">
+        <div class="feature-row reverse">
             <div class="feature-text">
-                <h2>Meet Up Freely, Share Selectively.</h2>
-                <p>Your location is shared only when it matters. [cite_start]We notify friends when you're at a venue, ready to meet up[cite: 181].</p>
-                <p>You're in control—no constant tracking, no unwanted sharing. [cite_start]Your privacy is as important to us as your spontaneous meet-ups[cite: 182].</p>
+                <h2>Meet Up Freely, <span>Share Selectively.</span></h2>
+                <p>Your location is shared only when it matters. We notify friends when you're at a venue, ready to meet up. No constant tracking, no unwanted sharing.</p>
             </div>
-            <div class="feature-img">
-                <img src="https://placehold.co/400x800/1a1a1a/FFF?text=Map+Privacy" alt="Map Privacy Feature">
+            <div class="feature-visual">
+                <img src="https://placehold.co/300x600/1a1a1a/FFF?text=Map+Privacy" alt="Privacy Feature">
             </div>
         </div>
-    </section>
 
-    <section class="container highlights">
-        <div class="feature">
+        <div class="feature-row">
             <div class="feature-text">
-                <h2>Relive Your Adventures!</h2>
-                <p>See a snapshot of your social life! [cite_start]You can easily look back on your favorite moments[cite: 217].</p>
-                [cite_start]<p>Check out where you've been, who you've hung out with, and enjoy fun highlights like your go-to spots and how often you meet up with your partner-in-crime[cite: 218].</p>
+                <h2>Relive Your <span>Adventures.</span></h2>
+                <p>See a snapshot of your social life! Check out where you've been, who you've hung out with, and enjoy fun highlights like your go-to spots.</p>
             </div>
-            <div class="feature-img">
-                <img src="https://placehold.co/400x800/1a1a1a/FFF?text=Highlights+UI" alt="Highlights Feature">
+            <div class="feature-visual">
+                <img src="https://placehold.co/300x600/1a1a1a/FFF?text=Highlights+UI" alt="Highlights Feature">
             </div>
         </div>
     </section>
 
     <section id="mission" class="mission">
         <div class="container mission-content">
-            <h2>Be present, not online</h2>
-            [cite_start]<p>Junto helps you spend less time in group chats and more time making real memories with friends[cite: 324].</p>
-            [cite_start]<p>By sending quick notifications when friends are nearby, Junto brings authentic connections back to life—encouraging you to live in the moment and meet up in real life, just like friendship should be[cite: 325].</p>
+            <h2 style="font-size: 3rem;">Be present, not online.</h2>
+            <p>Junto helps you spend less time in group chats and more time making real memories with friends.</p>
+            <p>We bring authentic connections back to life—encouraging you to live in the moment and meet up in real life, just like friendship should be.</p>
         </div>
     </section>
 
     <section class="container">
         <div style="text-align: center; margin-bottom: 40px;">
             <h2>Meet The Team</h2>
-            [cite_start]<p>We're Gilles, Emma, and Ivan—three lifelong friends with a shared passion for living life to the fullest[cite: 639].</p>
+            <p>Gilles, Emma, and Ivan—three lifelong friends with a shared passion for living life to the fullest.</p>
         </div>
         <div class="team-grid">
-            <div class="team-member">
-                <div class="team-photo"></div>
-                <h3>Gilles</h3>
-                <p>Co-Founder</p>
+            <div class="team-card">
+                <div class="team-avatar"></div> <h3>Gilles</h3>
+                <p style="margin-bottom: 0;">Co-Founder</p>
             </div>
-            <div class="team-member">
-                <div class="team-photo"></div>
+            <div class="team-card">
+                <div class="team-avatar"></div>
                 <h3>Emma</h3>
-                <p>Co-Founder</p>
+                <p style="margin-bottom: 0;">Co-Founder</p>
             </div>
-            <div class="team-member">
-                <div class="team-photo"></div>
+            <div class="team-card">
+                <div class="team-avatar"></div>
                 <h3>Ivan</h3>
-                <p>Co-Founder</p>
+                <p style="margin-bottom: 0;">Co-Founder</p>
             </div>
         </div>
-        <p style="text-align: center; margin-top: 30px;">
-            At 24, we're all about staying active, exploring the world, and connecting with people. [cite_start]We created Junto to inspire real-life connections[cite: 640, 641].
-        </p>
+    </section>
+
+    <section id="careers" class="container">
+        <h2 style="text-align: center;">Join the Mission</h2>
+        <p style="text-align: center;">We're looking for energetic individuals to join us in Flagey, Brussels.</p>
+        
+        <div class="job-list">
+            <div class="job-card">
+                <div class="job-header">
+                    <h3>Community Manager Intern</h3>
+                    <p>Marketing & Socials</p>
+                </div>
+                <ul>
+                    <li>Create aesthetic, engaging content (TikTok/IG)</li>
+                    <li>Organize events and campaigns</li>
+                    <li>Hybrid work from Brussels</li>
+                </ul>
+                <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply via Email</a>
+            </div>
+
+            <div class="job-card">
+                <div class="job-header">
+                    <h3>Business Strategy Intern</h3>
+                    <p>Growth & Operations</p>
+                </div>
+                <ul>
+                    <li>Shape the future strategy of Junto</li>
+                    <li>Creative problem solving</li>
+                    <li>Minimum 3 months</li>
+                </ul>
+                <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply via Email</a>
+            </div>
+
+            <div class="job-card">
+                <div class="job-header">
+                    <h3>App Developer Intern</h3>
+                    <p>Engineering</p>
+                </div>
+                <ul>
+                    <li>Flutter, Kotlin, or Swift Development</li>
+                    <li>Work on API integration & Security</li>
+                    <li>Flexible remote work</li>
+                </ul>
+                <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply via Email</a>
+            </div>
+        </div>
     </section>
 
     <section id="faq" class="container">
-        <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+        <h2 style="margin-bottom: 40px;">FAQ</h2>
         <div class="faq-item">
-            <div class="faq-question">How does Junto notify me when friends are nearby?</div>
-            [cite_start]<p>Junto sends you a simple notification when friends in your selected groups are close to your current location[cite: 409]. [cite_start]It's not about live tracking; it's about helping you catch spontaneous opportunities[cite: 410].</p>
+            <div class="faq-question">How does Junto notify me?</div>
+            <p>Junto sends a simple notification when friends in your selected groups are close to your current location. It's not about live tracking; it's about catching spontaneous opportunities.</p>
         </div>
         <div class="faq-item">
-            <div class="faq-question">Does Junto track my live location all the time?</div>
-            <p>No, Junto does not track your live location. [cite_start]We prioritize your privacy[cite: 412]. [cite_start]The app only uses location data to send notifications when you're near your friends, and we don't store real-time location info[cite: 413].</p>
+            <div class="faq-question">Does Junto track my live location 24/7?</div>
+            <p>No. We prioritize your privacy. The app only uses location data to send notifications when you're near friends. We don't store or share real-time location history.</p>
         </div>
         <div class="faq-item">
-            <div class="faq-question">Can I choose who gets notified when I'm nearby?</div>
-            <p>Absolutely! [cite_start]You can create different groups within the app and set specific preferences for each group[cite: 415]. [cite_start]You control who sees your status[cite: 416].</p>
-        </div>
-    </section>
-
-    <section id="careers" class="careers">
-        <div class="container">
-            <h2>Careers at Junto</h2>
-            [cite_start]<p>Join our team in Flagey, Brussels[cite: 376]. [cite_start]We're looking for like-minded, energetic individuals[cite: 643].</p>
-            
-            <div class="job-list">
-                <div class="job-card">
-                    <h3>Community Manager Intern</h3>
-                    [cite_start]<p>Capture Junto's essence and convey it creatively on social media[cite: 359].</p>
-                    <ul>
-                        [cite_start]<li>Create aesthetic, engaging content (TikTok/Instagram) [cite: 365, 372]</li>
-                        [cite_start]<li>Organize fun events and marketing campaigns [cite: 361]</li>
-                        [cite_start]<li>Based in Brussels (Flagey) [cite: 376]</li>
-                    </ul>
-                    <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply Now</a>
-                </div>
-
-                <div class="job-card">
-                    <h3>Business Strategy Intern</h3>
-                    [cite_start]<p>Collaborate with the team to develop the app features and strategy[cite: 588].</p>
-                    <ul>
-                        [cite_start]<li>Help shape the future of Junto [cite: 590]</li>
-                        [cite_start]<li>Creative problem solver & proactive [cite: 592, 595]</li>
-                        <li>Min. [cite_start]3 months, 2 days/week [cite: 605, 607]</li>
-                    </ul>
-                    <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply Now</a>
-                </div>
-
-                <div class="job-card">
-                    <h3>App Developer Intern</h3>
-                    [cite_start]<p>Work on features, data security, database management, and API integration[cite: 803, 804].</p>
-                    <ul>
-                        [cite_start]<li>Flutter, Kotlin, or Swift skills [cite: 813]</li>
-                        [cite_start]<li>Knowledge of cybersecurity is a plus [cite: 814]</li>
-                    </ul>
-                    <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply Now</a>
-                </div>
-            </div>
-            [cite_start]<p style="text-align: center;">Send your CV and a short motivation to <strong>contact@juntosocials.com</strong> [cite: 869]</p>
+            <div class="faq-question">Can I control who sees me?</div>
+            <p>Absolutely. You create different groups and set specific preferences for each. You control who sees your status and when they get notified.</p>
         </div>
     </section>
 
     <footer id="waitlist">
         <div class="container">
-            <h2>Catch up in real life</h2>
-            [cite_start]<p>Join the waitlist to get early access[cite: 262].</p>
-            <form class="waitlist-form" onsubmit="event.preventDefault(); alert('Thanks for joining!');">
-                <input type="email" placeholder="Email Address" required>
-                <button type="submit" class="btn">JOIN</button>
+            <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Catch up in real life</h2>
+            <p>Join the waitlist to get early access to Junto.</p>
+            <form class="waitlist-form" onsubmit="event.preventDefault(); alert('Thanks for joining the waitlist!');">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Join Now</button>
             </form>
-            <br><br>
-            <p>&copy; 2026 Junto Socials. All rights reserved.</p>
-            <p><small>contact@juntosocials.com</small></p>
+            <div style="margin-top: 60px; color: #555; font-size: 0.9rem;">
+                <p>&copy; 2026 Junto Socials. Brussels, Belgium.</p>
+                <p>contact@juntosocials.com</p>
+            </div>
         </div>
     </footer>
 
