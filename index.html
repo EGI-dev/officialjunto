@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junto | Keep It Spontaneous</title>
+    <style>
+        /* --- CSS Reset & Variables --- */
+        :root {
+            --bg-color: #0f0f0f;
+            --text-color: #ffffff;
+            --accent-color: #ff6b35; /* Orange accent inferred from "Highlights" context */
+            --secondary-bg: #1a1a1a;
+            --gray-text: #a1a1a1;
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- Layout Utilities --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--gray-text);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: 2px solid var(--text-color);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--text-color);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-style: italic; /* Mimicking the logo style */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #a1a1a1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        .hero-image {
+            margin-top: 50px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- Features Sections --- */
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .feature:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .feature-img img {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* --- Privacy & Mission --- */
+        .mission {
+            background-color: var(--secondary-bg);
+            text-align: center;
+        }
+
+        .mission-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- Highlights --- */
+        .highlights h2 { color: var(--accent-color); }
+
+        /* --- Team Section --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: var(--secondary-bg);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .team-photo {
+            width: 100px;
+            height: 100px;
+            background-color: #333;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+        }
+
+        /* --- Careers --- */
+        .careers {
+            background-color: var(--secondary-bg);
+        }
+        
+        .job-list {
+            margin-top: 40px;
+        }
+
+        .job-card {
+            background: var(--bg-color);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        .job-card h3 { margin-bottom: 10px; }
+        .job-card ul { list-style: disc; margin-left: 20px; color: var(--gray-text); margin-bottom: 20px; }
+
+        /* --- FAQ --- */
+        .faq-item {
+            border-bottom: 1px solid #333;
+            padding: 20px 0;
+        }
+        .faq-question {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            border-top: 1px solid #333;
+            margin-top: 50px;
+        }
+
+        .waitlist-form input {
+            padding: 15px;
+            border-radius: 50px;
+            border: none;
+            width: 300px;
+            margin-right: 10px;
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .feature { flex-direction: column !important; text-align: center; }
+            .nav-links { display: none; } /* Simplified for this snippet */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <div class="nav-logo">Junto</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#mission">Mission</a>
+                <a href="#careers">Careers</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <a href="#waitlist" class="btn">Join Waitlist</a>
+        </nav>
+    </div>
+
+    <header class="hero container">
+        <div class="hero-content">
+            <h1>Ready to Keep It Spontaneous?</h1>
+            <p>Junto helps you seize the opportunity to meet friends nearby. You're always one notification away from a great time.</p>
+            <a href="#waitlist" class="btn">Join the Community</a>
+            <br>
+            <img src="https://placehold.co/350x700/1a1a1a/FFF?text=App+Screenshot" alt="Junto App Interface" class="hero-image">
+        </div>
+    </header>
+
+    <section id="features" class="container">
+        <div class="feature">
+            <div class="feature-text">
+                <h2>Your Circles, Your Rules.</h2>
+                <p>Create custom circles for different groups of friends and set personalized notifications based on what you want.</p>
+                <p>Whether it's your gym buddy or your favorite crew for happy hour, choose to get notified based on interests or when they're at specific venues you love.</p>
+            </div>
+            <div class="feature-img">
+                <img src="https://placehold.co/400x800/1a1a1a/FFF?text=Circles+UI" alt="Circles Feature">
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="feature">
+            <div class="feature-text">
+                <h2>Meet Up Freely, Share Selectively.</h2>
+                <p>Your location is shared only when it matters. We notify friends when you're at a venue, ready to meet up.</p>
+                <p>You're in control—no constant tracking, no unwanted sharing. Your privacy is as important to us as your spontaneous meet-ups.</p>
+            </div>
+            <div class="feature-img">
+                <img src="https://placehold.co/400x800/1a1a1a/FFF?text=Map+Privacy" alt="Map Privacy Feature">
+            </div>
+        </div>
+    </section>
+
+    <section class="container highlights">
+        <div class="feature">
+            <div class="feature-text">
+                <h2>Relive Your Adventures!</h2>
+                <p>See a snapshot of your social life! You can easily look back on your favorite moments.</p>
+                <p>Check out where you've been, who you've hung out with, and enjoy fun highlights like your go-to spots and how often you meet up with your partner-in-crime.</p>
+            </div>
+            <div class="feature-img">
+                <img src="https://placehold.co/400x800/1a1a1a/FFF?text=Highlights+UI" alt="Highlights Feature">
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" class="mission">
+        <div class="container mission-content">
+            <h2>Be present, not online</h2>
+            <p>Junto helps you spend less time in group chats and more time making real memories with friends.</p>
+            <p>By sending quick notifications when friends are nearby, Junto brings authentic connections back to life—encouraging you to live in the moment and meet up in real life, just like friendship should be.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2>Meet The Team</h2>
+            <p>We're Gilles, Emma, and Ivan—three lifelong friends with a shared passion for living life to the fullest.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-photo"></div>
+                <h3>Gilles</h3>
+                <p>Co-Founder</p>
+            </div>
+            <div class="team-member">
+                <div class="team-photo"></div>
+                <h3>Emma</h3>
+                <p>Co-Founder</p>
+            </div>
+            <div class="team-member">
+                <div class="team-photo"></div>
+                <h3>Ivan</h3>
+                <p>Co-Founder</p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 30px;">
+            At 24, we're all about staying active, exploring the world, and connecting with people. We created Junto to inspire real-life connections.
+        </p>
+    </section>
+
+    <section id="faq" class="container">
+        <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <div class="faq-question">How does Junto notify me when friends are nearby?</div>
+            <p>Junto sends you a simple notification when friends in your selected groups are close to your current location. It's not about live tracking; it's about helping you catch spontaneous opportunities.</p>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Does Junto track my live location all the time?</div>
+            <p>No, Junto does not track your live location. We prioritize your privacy. The app only uses location data to send notifications when you're near your friends, and we don't store real-time location info.</p>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Can I choose who gets notified when I'm nearby?</div>
+            <p>Absolutely! You can create different groups within the app and set specific preferences for each group. You control who sees your status.</p>
+        </div>
+    </section>
+
+    <section id="careers" class="careers">
+        <div class="container">
+            <h2>Careers at Junto</h2>
+            <p>Join our team in Flagey, Brussels. We're looking for like-minded, energetic individuals.</p>
+            
+            <div class="job-list">
+                <div class="job-card">
+                    <h3>Community Manager Intern</h3>
+                    <p>Capture Junto's essence and convey it creatively on social media.</p>
+                    <ul>
+                        <li>Create aesthetic, engaging content (TikTok/Instagram)</li>
+                        <li>Organize fun events and marketing campaigns</li>
+                        <li>Based in Brussels (Flagey)</li>
+                    </ul>
+                    <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply Now</a>
+                </div>
+
+                <div class="job-card">
+                    <h3>Business Strategy Intern</h3>
+                    <p>Collaborate with the team to develop the app features and strategy.</p>
+                    <ul>
+                        <li>Help shape the future of Junto</li>
+                        <li>Creative problem solver & proactive</li>
+                        <li>Min. 3 months, 2 days/week</li>
+                    </ul>
+                    <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply Now</a>
+                </div>
+
+                <div class="job-card">
+                    <h3>App Developer Intern</h3>
+                    <p>Work on features, data security, database management, and API integration.</p>
+                    <ul>
+                        <li>Flutter, Kotlin, or Swift skills</li>
+                        <li>Knowledge of cybersecurity is a plus</li>
+                    </ul>
+                    <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply Now</a>
+                </div>
+            </div>
+            <p style="text-align: center;">Send your CV and a short motivation to <strong>contact@juntosocials.com</strong></p>
+        </div>
+    </section>
+
+    <footer id="waitlist">
+        <div class="container">
+            <h2>Catch up in real life</h2>
+            <p>Join the waitlist to get early access.</p>
+            <form class="waitlist-form" onsubmit="event.preventDefault(); alert('Thanks for joining!');">
+                <input type="email" placeholder="Email Address" required>
+                <button type="submit" class="btn">JOIN</button>
+            </form>
+            <br><br>
+            <p>&copy; 2026 Junto Socials. All rights reserved.</p>
+            <p><small>contact@juntosocials.com</small></p>
+        </div>
+    </footer>
+
+</body>
+</html>
