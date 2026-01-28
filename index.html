@@ -3,605 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junto | The Exclusive Social Club for Goal-Oriented People</title>
     
-    <title>Junto | Less doomscrolling. More real life.</title>
-    <meta name="description" content="Junto is the privacy-first meetup app for friends. No background location. No endless feed. Just spontaneous time together.">
-    
-    <link rel="icon" href="https://i.imgur.com/IFGgKEE.png">
+    <link rel="icon" type="image/png" href="https://i.imgur.com/MKnJhP3.png">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- VARIABLES & RESET --- */
+        /* --- CSS Variables --- */
         :root {
-            --bg-color: #ffffff;
-            --text-main: #111111;
-            --text-secondary: #666666;
-            --border-color: #e5e5e5;
-            --card-bg: #ffffff;
-            --primary-black: #000000;
-            --accent-radius: 12px;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --nav-height: 70px;
+            /* Brand Colors from Logo/Background */
+            --primary-color: #00E5FF; /* Neon Cyan/Teal */
+            --secondary-color: #7C4DFF; /* Deep Purple */
+            --bg-dark: #0a0a12; /* Almost Black */
+            --bg-card: #141420; /* Dark Card Background */
+            --text-light: #ffffff;
+            --text-muted: #b3b3b3;
+            --gradient-accent: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- Global Reset & Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-main);
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.5;
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.2s; }
-        ul { list-style: none; }
-        img { display: block; max-width: 100%; }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
 
-        /* --- LAYOUT --- */
+        h1 { font-size: 4rem; line-height: 1.1; }
+        h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+        a { text-decoration: none; transition: all 0.3s ease; }
+        
+        img { max-width: 100%; height: auto; }
+
+        /* --- Reusable Components --- */
         .container {
-            max-width: 1120px;
+            width: 90%;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
         }
 
-        section { padding: 80px 0; }
-
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 {
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            color: var(--primary-black);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 24px;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 40px;
-        }
-
-        h3 {
-            font-size: 1.125rem;
-            margin-bottom: 8px;
-        }
-
-        p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        /* --- BUTTONS --- */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
         }
 
-        .btn-black {
-            background: var(--primary-black);
-            color: white;
-            border: 1px solid var(--primary-black);
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: var(--bg-dark);
         }
-        .btn-black:hover { opacity: 0.8; }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 229, 255, 0.5);
+        }
 
         .btn-outline {
             background: transparent;
-            color: var(--primary-black);
-            border: 1px solid #ddd;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
         }
-        .btn-outline:hover { border-color: var(--primary-black); background: #f9f9f9; }
 
-        /* --- NAVIGATION --- */
-        nav {
-            height: var(--nav-height);
-            border-bottom: 1px solid transparent;
-            position: sticky;
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+        }
+
+        .section-padding {
+            padding: 8rem 0;
+        }
+
+        .text-gradient {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Scroll Animation Classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER & HERO --- */
+        header {
+            position: absolute;
             top: 0;
-            background: rgba(255,255,255,0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 10;
         }
 
-        .nav-inner {
+        header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
         }
 
-        .nav-logo {
-            font-weight: 800;
-            font-size: 1.5rem;
+        .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--text-light);
         }
 
-        .logo-circle {
-            width: 24px; height: 24px;
-            background: black;
-            border-radius: 50%;
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
         }
 
-        .nav-links {
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
             display: flex;
-            gap: 32px;
+            align-items: center;
+            background-image: url('https://i.imgur.com/4YTrGjt.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax Effect */
         }
-        .nav-links a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-        .nav-links a:hover { color: var(--primary-black); }
 
-        .nav-actions { display: flex; gap: 10px; }
-        .pill-btn {
-            padding: 6px 16px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-size: 0.85rem;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(10, 10, 18, 0.6), var(--bg-dark));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin: 1.5rem 0 2.5rem;
             font-weight: 600;
         }
-        .pill-btn.filled { background: black; color: white; border-color: black; }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            padding-top: 60px;
-            padding-bottom: 100px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
+        /* --- PHILOSOPHY SECTION --- */
+        .philosophy {
+            background: var(--bg-dark);
+            text-align: center;
         }
 
-        .store-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 32px;
-            flex-wrap: wrap;
+        .philosophy-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .philosophy p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
         }
         
-        .store-badge {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 8px 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
-        .store-badge:hover { border-color: black; }
-
-        .hero-phone {
-            background: #f5f5f7;
-            border-radius: 40px;
-            padding: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            border: 8px solid white;
-            max-width: 320px;
-            margin: 0 auto;
+        .historical-note {
+            font-style: italic;
+            color: var(--primary-color);
         }
 
-        /* --- CARDS GRID (Why Junto, How it works) --- */
-        .grid-3 {
+        /* --- FEATURES SECTION --- */
+        .features {
+            background: linear-gradient(to bottom, var(--bg-dark), var(--bg-card));
+        }
+
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            gap: 3rem;
+            margin-top: 4rem;
         }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--accent-radius);
-            padding: 32px;
-            transition: 0.2s;
+        .feature-card {
+            background: var(--bg-card);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--primary-color);
         }
         
-        .card:hover { border-color: #bbb; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
 
-        .step-number {
-            width: 32px; height: 32px;
-            background: black;
-            color: white;
+        .feature-icon {
+            display: inline-block;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+        }
+
+        /* --- TESTIMONIALS SECTION --- */
+        .testimonials {
+            background: var(--bg-card);
+            text-align: center;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: left;
+            position: relative;
+        }
+        
+        .testimonial-card.historical {
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .testimonial-card.modern {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.1);
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            background: var(--gradient-accent);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            margin-bottom: 16px;
+            font-weight: 700;
+            color: var(--bg-dark);
+            margin-right: 1rem;
         }
-
-        /* --- PRIVACY SECTION --- */
-        .privacy-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-        .privacy-card {
-            border: 1px solid var(--border-color);
-            border-radius: var(--accent-radius);
-            padding: 40px;
-        }
-        .privacy-card ul {
-            list-style: disc;
-            margin-left: 20px;
-            margin-top: 16px;
-            color: var(--text-secondary);
-        }
-        .privacy-card li { margin-bottom: 8px; }
-
-        /* --- WAITLIST FORM --- */
-        .waitlist-section {
-            background: #fafafa;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .form-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        .form-box {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-        }
-
-        .form-group { margin-bottom: 20px; }
-        .form-label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
         
-        .form-input, .form-select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: var(--font-main);
-            outline: none;
-        }
-        .form-input:focus, .form-select:focus { border-color: black; }
-
-        .checkbox-group {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
+        .historical .author-avatar {
+             background: var(--secondary-color);
+             color: white;
         }
 
-        /* --- FAQ --- */
-        .faq-item {
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin-bottom: 12px;
-            padding: 20px;
-            cursor: pointer;
-            background: white;
-        }
-        .faq-question {
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-        }
-        .faq-answer {
-            margin-top: 12px;
-            color: var(--text-secondary);
-            display: none; /* JS would toggle this */
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding: 60px 0;
+        .author-info span {
             font-size: 0.9rem;
-            color: var(--text-secondary);
+            color: var(--text-muted);
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+        /* --- FOOTER & CTA --- */
+        .footer-cta {
+            background: linear-gradient(to top, var(--bg-dark), var(--bg-card));
+            text-align: center;
+            padding: 8rem 0 4rem;
         }
-        .footer-col h4 { color: black; font-weight: 600; margin-bottom: 16px; }
-        .footer-col li { margin-bottom: 10px; }
 
-        /* --- RESPONSIVE --- */
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .btn-app-store {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            background: var(--text-light);
+            color: var(--bg-dark);
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-app-store:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-app-store i {
+            font-size: 1.8rem;
+            margin-right: 0.8rem;
+        }
+        
+        .btn-text span {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .btn-text h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        footer {
+            background: var(--bg-dark);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive Media Queries --- */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .hero-phone { margin-top: 40px; }
-            .nav-links { display: none; }
-            .form-layout, .privacy-grid { grid-template-columns: 1fr; }
-            .store-buttons { justify-content: center; }
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2rem; }
+            .hero-tagline { font-size: 1rem; }
+            .btn { padding: 0.8rem 2rem; }
+            
+            .app-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-app-store {
+                width: 200px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="container nav-inner">
-            <a href="#" class="nav-logo">
-                <div class="logo-circle"></div> Junto
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="https://i.imgur.com/MKnJhP3.png" alt="Junto Logo">
+                JUNTO
             </a>
-            
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#how-it-works">How it works</a>
-                <a href="#privacy">Privacy</a>
-                <a href="#faq">FAQ</a>
             </div>
-
-            <div class="nav-actions">
-                <a href="#waitlist" class="pill-btn">iOS</a>
-                <a href="#waitlist" class="pill-btn filled">Android</a>
-            </div>
-        </div>
-    </nav>
-
-    <header class="container hero">
-        <div class="hero-text">
-            <h1>Less doomscrolling.<br>More real life.</h1>
-            <p>Junto is the privacy-first meetup app for friends. Post a plan, your friends tap Join, and you meet IRL. No background location. No endless feed. Just spontaneous time together.</p>
-            
-            <div class="store-buttons">
-                <button class="store-badge">
-                    <svg width="20" height="24" viewBox="0 0 384 512" style="fill:black"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 66.2 23.9 149.4 61 213.3 23.5 40.6 54.6 61.6 88.5 61.6 33.7 0 52.3-25.2 88.1-25.2 35.8 0 52.3 25.2 88.1 25.2 34.6 0 66.8-23.7 88.5-59.5-62.8-24.3-80.4-89.9-79.4-119.8zm-65.5-177.3c15.2-18.5 25.9-44.1 23-69.5-22.3 1-49.9 15.3-66.1 33.8-13.6 15.6-25.8 40.5-22.6 68.6 24.8 1.9 50.4-14 65.7-32.9z"/></svg>
-                    <div style="text-align:left; line-height:1.1;">
-                        <span style="font-size:0.6rem; display:block;">Download on the</span>
-                        <span style="font-weight:600;">App Store</span>
-                    </div>
-                </button>
-
-                <button class="store-badge">
-                    <svg width="20" height="24" viewBox="0 0 512 512" style="fill:black"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
-                    <div style="text-align:left; line-height:1.1;">
-                        <span style="font-size:0.6rem; display:block;">GET IT ON</span>
-                        <span style="font-weight:600;">Google Play</span>
-                    </div>
-                </button>
-
-                <a href="#waitlist" class="btn btn-outline" style="padding: 10px 20px;">Join the waiting list</a>
-            </div>
-
-            <ul style="margin-top: 30px; font-size: 0.9rem; color: #555;">
-                <li style="margin-bottom:8px;">• Location shared only when you post</li>
-                <li style="margin-bottom:8px;">• Time-boxed invites that auto-expire</li>
-                <li>• One tap to join, optional ETA, Maps deep-link</li>
-            </ul>
-        </div>
-
-        <div class="hero-phone">
-            <div style="background: white; border-radius: 20px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 12px;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <h4 style="font-size:0.9rem;">Coffee @ Flagey</h4>
-                    <span style="background:black; color:white; padding:4px 10px; border-radius:4px; font-size:0.7rem;">Join</span>
-                </div>
-                <p style="font-size:0.75rem; margin-top:4px;">Today • 17:00-19:00</p>
-                <p style="font-size:0.75rem; margin-top:4px; color:#888;">Rose, Sean, Enzo</p>
-            </div>
-
-            <div style="background: white; border-radius: 20px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 12px;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <h4 style="font-size:0.9rem;">Climbing • BLOCBX</h4>
-                    <span style="background:black; color:white; padding:4px 10px; border-radius:4px; font-size:0.7rem;">Join</span>
-                </div>
-                <p style="font-size:0.75rem; margin-top:4px;">Sat • 14:30-16:00</p>
-                <p style="font-size:0.75rem; margin-top:4px; color:#888;">Gilles, Emma</p>
-            </div>
-            
-            <div style="text-align: center; color: #ddd; margin-top: 50px;">
-                <div style="width: 40px; height: 5px; background: #eee; margin: 0 auto; border-radius: 10px;"></div>
-            </div>
-        </div>
     </header>
 
-    <section id="features" class="container">
-        <h2>Why Junto?</h2>
-        <div class="grid-3">
-            <div class="card">
-                <h3>Privacy-first by design</h3>
-                <p>No background tracking. Location is shared only in a time-boxed post you create. Posts auto-expire and disappear.</p>
-            </div>
-            <div class="card">
-                <h3>Spontaneous, not stressful</h3>
-                <p>No feeds, no follower counts, no addictive loops. Junto nudges you off-screen and into the real world.</p>
-            </div>
-            <div class="card">
-                <h3>Simple and clear</h3>
-                <p>Create a plan, tag a venue, set an expiry. Friends tap Join and get a Maps deep-link, with optional ETA.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="how-it-works" class="container">
-        <div class="grid-3">
-            <div class="card">
-                <div class="step-number">1</div>
-                <h3>Post a plan</h3>
-                <p>Pick a place, set a window, and share with friends.</p>
-            </div>
-            <div class="card">
-                <div class="step-number">2</div>
-                <h3>Friends tap Join</h3>
-                <p>They see your plan, choose to join, and optionally share ETA.</p>
-            </div>
-            <div class="card">
-                <div class="step-number">3</div>
-                <h3>Meet IRL</h3>
-                <p>Maps opens with the venue. No chat chaos. No FOMO, just people.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="privacy" class="container">
-        <h2>Privacy & Safety</h2>
-        <div class="privacy-grid">
-            <div class="privacy-card">
-                <h3>Your data, under your control</h3>
-                <ul>
-                    <li>No background location: we access location only when you post.</li>
-                    <li>Time-boxed sharing: each post auto-expires.</li>
-                    <li>Clear visibility controls: friends and chosen circles only.</li>
-                    <li>No infinite feeds. No ads. No dark patterns.</li>
-                </ul>
-            </div>
-            <div class="privacy-card">
-                <h3>Safety tools</h3>
-                <ul>
-                    <li>Easy reporting for content or user behavior.</li>
-                    <li>Block and remove features to keep your space safe.</li>
-                    <li>Venue-partner escalation for onsite incidents.</li>
-                    <li>We review safety reports with care and urgency.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="waitlist" class="waitlist-section">
+    <section class="hero">
         <div class="container">
-            <div class="form-layout">
-                <div>
-                    <h2>Join the waiting list</h2>
-                    <p>We're rolling out first at universities in Brussels (ULB, VUB, USL-B), then expanding. Add your details and we'll notify you when Junto opens in your area.</p>
+            <div class="hero-content fade-in-up">
+                <h1><span class="text-gradient">Elevate</span> Your Circle. <br>Achieve Your Goals.</h1>
+                <p class="hero-tagline">The exclusive social club for goal-oriented people. Connect, collaborate, and grow with a curated community.</p>
+                <a href="#download" class="btn btn-primary">GET THE APP</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding philosophy">
+        <div class="container">
+            <div class="fade-in-up">
+                <i class="fas fa-feather-alt philosophy-icon"></i>
+                <h2>The Modern <span class="text-gradient">Junto</span></h2>
+                <p>In 1727, Benjamin Franklin formed the Junto—a club for mutual improvement where members debated philosophy, morals, and politics to better themselves and their community.</p>
+                <p class="historical-note">In 2025, we are bringing it back for the digital age.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding features">
+        <div class="container">
+            <div class="text-center fade-in-up">
+                <h2>Features Designed for <span class="text-gradient">Growth</span></h2>
+                <p style="color: var(--text-muted); max-width: 600px;">A powerful toolkit to connect you with the right people and keep you accountable.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3>Create or Join a Junto</h3>
+                    <p>Form your own exclusive circle based on shared interests or goals, or request to join an existing high-impact group.</p>
                 </div>
-
-                <div class="form-box">
-                    <form onsubmit="event.preventDefault(); alert('Joined!');">
-                        <div class="form-group">
-                            <label class="form-label">Full name *</label>
-                            <input type="text" class="form-input" placeholder="Alex Example" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Email *</label>
-                            <input type="email" class="form-input" placeholder="you@university.be" required>
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <div class="form-group">
-                                <label class="form-label">University</label>
-                                <select class="form-select">
-                                    <option>ULB</option>
-                                    <option>VUB</option>
-                                    <option>USL-B</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">City</label>
-                                <input type="text" class="form-input" value="Brussels">
-                            </div>
-                        </div>
-
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="updates">
-                            <label for="updates">I'd like occasional updates (product tips, launch info)</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="privacy-check" required>
-                            <label for="privacy-check">I consent to the storage and processing of my data for the purpose of receiving Junto updates. See our Privacy Policy.</label>
-                        </div>
-
-                        <button type="submit" class="btn btn-black" style="width: 100%;">Join the waiting list</button>
-                    </form>
+                <div class="feature-card fade-in-up" style="transition-delay: 0.1s;">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h3>Discover Driven Members</h3>
+                    <p>Swipe to connect with like-minded individuals. Our algorithm matches you with potential partners for collaboration.</p>
+                </div>
+                <div class="feature-card fade-in-up" style="transition-delay: 0.2s;">
+                    <i class="far fa-calendar-alt feature-icon"></i>
+                    <h3>Organize Dynamic Meetings</h3>
+                    <p>Schedule and manage virtual or in-person gatherings with built-in agendas, discussion topics, and follow-ups.</p>
+                </div>
+                <div class="feature-card fade-in-up" style="transition-delay: 0.3s;">
+                    <i class="fas fa-bullseye feature-icon"></i>
+                    <h3>Define & Track Goals</h3>
+                    <p>Set clear objectives, track your progress visually, and receive constructive feedback from your Junto to stay on course.</p>
+                </div>
+                <div class="feature-card fade-in-up" style="transition-delay: 0.4s;">
+                    <i class="far fa-comments feature-icon"></i>
+                    <h3>Connect & Grow</h3>
+                    <p>Engage in meaningful discussions, share resources, and build lasting professional relationships in a private environment.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="faq" class="container">
-        <h2>FAQ</h2>
-        
-        <div class="faq-item">
-            <div class="faq-question">Is Junto free? <span>+</span></div>
-            <div class="faq-answer" style="display:block; margin-top:10px;">
-                Yes during the alpha. We're exploring fair, transparent pricing for future venue-powered perks—never pay-to-be-seen social feeds.
+    <section class="section-padding testimonials">
+        <div class="container">
+            <h2 class="fade-in-up">What Our <span class="text-gradient">Members</span> Say</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card historical fade-in-up">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testimonial-text">"From the Junto I... improve my speaking... and was also of great use to me in my business... by the connections I made there."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">BF</div>
+                        <div class="author-info">
+                            <h4>Benjamin Franklin</h4>
+                            <span>Founder, The Original Junto (1727)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card modern fade-in-up" style="transition-delay: 0.1s;">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testimonial-text">"Junto has been an invaluable resource for feedback on my startup ideas. The quality of people here is unmatched."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SL</div>
+                        <div class="author-info">
+                            <h4>Sarah L.</h4>
+                            <span>Tech Entrepreneur</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card modern fade-in-up" style="transition-delay: 0.2s;">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testimonial-text">"I found the accountability partner I didn't know I needed. My productivity has doubled since joining my Junto."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MD</div>
+                        <div class="author-info">
+                            <h4>Mark D.</h4>
+                            <span>Marketing Executive</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="faq-item">
-            <div class="faq-question">Do you track my location in the background? <span>+</span></div>
-            <div class="faq-answer">No. We only get location when you choose to post a plan. After expiry, it's gone from your feed.</div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">Who can see my posts? <span>+</span></div>
-            <div class="faq-answer">Only your chosen circles—friends and the people you share with. Junto avoids public feeds by default.</div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">Where will you launch first? <span>+</span></div>
-            <div class="faq-answer">We're starting at Brussels universities, then expanding city by city based on demand.</div>
+    <section class="footer-cta" id="download">
+        <div class="container fade-in-up">
+            <h2>Ready to <span class="text-gradient">Join the Club?</span></h2>
+            <p style="color: var(--text-muted); margin-top: 1rem;">Download the app and start your journey today.</p>
+            
+            <div class="app-buttons">
+                <a href="#" class="btn-app-store">
+                    <i class="fab fa-apple"></i>
+                    <div class="btn-text">
+                        <span>Download on the</span>
+                        <h5>App Store</h5>
+                    </div>
+                </a>
+                <a href="#" class="btn-app-store">
+                    <i class="fab fa-google-play"></i>
+                    <div class="btn-text">
+                        <span>GET IT ON</span>
+                        <h5>Google Play</h5>
+                    </div>
+                </a>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="nav-logo" style="margin-bottom: 20px;">
-                        <div class="logo-circle"></div> Junto
-                    </div>
-                    <p>The anti-social social app. Less screen time, more real time.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Product</h4>
-                    <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#how-it-works">How it works</a></li>
-                        <li><a href="#privacy">Privacy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#waitlist">Waiting list</a></li>
-                        <li><a href="#">Complaints</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Safety & reporting</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div style="display:flex; justify-content:space-between; border-top: 1px solid #eee; padding-top: 30px;">
-                <p>&copy; 2026 Junto. All rights reserved.</p>
-                <div style="display:flex; gap: 10px;">
-                    <button class="pill-btn">iOS</button>
-                    <button class="pill-btn">Android</button>
-                    <button class="btn btn-black" style="padding: 6px 16px; font-size: 0.85rem;">Join waitlist</button>
-                </div>
-            </div>
+            <a href="#" class="logo" style="justify-content: center; margin-bottom: 1rem;">
+                <img src="https://i.imgur.com/MKnJhP3.png" alt="Junto Logo" style="height: 30px;">
+                JUNTO
+            </a>
+            <p>&copy; 2026 Junto. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+
+            function check Fade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    if (elementTop < windowHeight - 50) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+
+            // Check on load and on scroll
+            checkFade();
+            window.addEventListener('scroll', checkFade);
+        });
+    </script>
 
 </body>
 </html>
