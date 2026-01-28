@@ -22,6 +22,9 @@
             --radius: 16px;
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --danger-bg: #FFFBEB;
+            --danger-border: #FCD34D;
+            --danger-text: #92400E;
         }
 
         /* --- GLOBAL & ANIMATIONS --- */
@@ -30,23 +33,14 @@
         body { background-color: var(--white); color: var(--black); line-height: 1.5; overflow-x: hidden; }
         html { scroll-behavior: smooth; }
 
-        /* Keyframes for animations */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
 
-        /* Class to trigger animations via JS */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- NAVIGATION --- */
         nav {
@@ -54,7 +48,6 @@
             padding: 1.2rem 5%; position: fixed; top: 0; width: 100%;
             background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px);
             z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
         }
 
         .logo-container {
@@ -66,27 +59,14 @@
         .logo-img { height: 36px; width: 36px; border-radius: 50%; object-fit: cover; }
 
         .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a {
-            text-decoration: none; color: var(--black); font-weight: 500;
-            font-size: 0.95rem; position: relative;
-        }
-        
-        /* Nav Link Hover Effect */
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0; height: 2px;
-            bottom: -4px; left: 0; background-color: var(--black);
-            transition: width 0.3s;
-        }
+        .nav-links a { text-decoration: none; color: var(--black); font-weight: 500; font-size: 0.95rem; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: var(--black); transition: width 0.3s; }
         .nav-links a:hover::after { width: 100%; }
 
         .nav-buttons { display: flex; gap: 12px; }
-        .btn-small {
-            padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600;
-            font-size: 0.9rem; text-decoration: none; transition: all 0.2s;
-        }
+        .btn-small { padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; }
         .btn-outline { border: 1px solid var(--grey-border); color: var(--black); }
         .btn-outline:hover { border-color: var(--black); background: var(--grey-light); }
-        
         .btn-black { background: var(--black); color: var(--white); }
         .btn-black:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
@@ -94,162 +74,114 @@
         header {
             min-height: 100vh; display: flex; align-items: center;
             padding: 8rem 5% 4rem; position: relative;
-            /* New Background Image (ID: Or8WuLI) with overlay */
             background: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 100%), 
                         url('https://i.imgur.com/Or8WuLI.jpeg');
             background-size: cover; background-position: center;
         }
 
-        .hero-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
-            max-width: 1200px; margin: 0 auto; align-items: center;
-        }
-
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto; align-items: center; }
+        
         .hero-content { opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 0.2s; }
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
         .hero-content h1 {
-            font-size: 4.2rem; font-weight: 800; line-height: 1.1;
-            letter-spacing: -2px; margin-bottom: 1.5rem;
-            background: linear-gradient(to bottom, #000, #333);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: 4.2rem; font-weight: 800; line-height: 1.1; letter-spacing: -2px; margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #000, #333); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .hero-content p {
-            font-size: 1.3rem; color: #4B5563; margin-bottom: 2.5rem;
-            max-width: 500px; line-height: 1.6;
-        }
+        .hero-content p { font-size: 1.3rem; color: #4B5563; margin-bottom: 2.5rem; max-width: 500px; line-height: 1.6; }
 
-        .app-store-buttons { display: flex; gap: 1rem; margin-bottom: 3rem; }
-        
         .store-btn {
-            display: flex; align-items: center; gap: 10px;
-            background: var(--white); border: 1px solid var(--grey-border);
-            padding: 0.9rem 1.8rem; border-radius: 12px;
-            text-decoration: none; color: var(--black); font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: var(--shadow-sm);
+            display: flex; align-items: center; gap: 10px; background: var(--white); border: 1px solid var(--grey-border);
+            padding: 0.9rem 1.8rem; border-radius: 12px; text-decoration: none; color: var(--black); font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: var(--shadow-sm);
         }
         .store-btn:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--black); }
 
-        /* --- PHONE MOCKUP (Floating) --- */
-        .phone-mockup-container {
-            position: relative;
-            display: flex; justify-content: center;
-        }
-
+        /* --- PHONE MOCKUP --- */
+        .phone-mockup-container { position: relative; display: flex; justify-content: center; }
         .phone-mockup {
-            background: var(--white); border: 8px solid #F0F0F0;
-            border-radius: 40px; box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.2);
-            overflow: hidden; height: 620px; width: 310px;
-            display: flex; flex-direction: column;
-            animation: float 6s ease-in-out infinite; /* Floating Animation */
+            background: var(--white); border: 8px solid #F0F0F0; border-radius: 40px; box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.2);
+            overflow: hidden; height: 620px; width: 310px; display: flex; flex-direction: column; animation: float 6s ease-in-out infinite;
         }
-        
         .mockup-header { padding: 25px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;}
-        .mockup-header h4 { font-weight: 800; font-size: 1.2rem; }
-        .tag { background: #eee; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; color: #666; }
-
         .mockup-card {
-            margin: 15px 15px 0; padding: 18px; border: 1px solid #eee;
-            border-radius: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            margin: 15px 15px 0; padding: 18px; border: 1px solid #eee; border-radius: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);
             transition: transform 0.3s ease; background: white;
         }
         .mockup-card:hover { transform: scale(1.02); border-color: #ddd; }
-        
-        .join-btn-mock {
-            background: var(--black); color: white; padding: 6px 16px;
-            border-radius: 8px; font-size: 0.85rem; float: right; border: none; font-weight: 600; cursor: pointer;
-        }
-        .join-btn-mock:hover { background: #333; }
+        .join-btn-mock { background: var(--black); color: white; padding: 6px 16px; border-radius: 8px; border: none; font-weight: 600; float: right; }
 
-        /* --- SECTIONS COMMON --- */
+        /* --- SECTIONS --- */
         .section { padding: 8rem 5%; max-width: 1200px; margin: 0 auto; }
         .section-title { font-size: 2.8rem; font-weight: 800; margin-bottom: 4rem; letter-spacing: -1px; text-align: center; }
 
-        /* --- FEATURES GRID --- */
+        /* --- FEATURES & HOW IT WORKS --- */
         .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
-
         .step-card {
-            border: 1px solid var(--grey-border); border-radius: var(--radius);
-            padding: 2.5rem; background: var(--white); transition: all 0.4s ease;
-            position: relative; overflow: hidden;
+            border: 1px solid var(--grey-border); border-radius: var(--radius); padding: 2.5rem; background: var(--white);
+            transition: all 0.4s ease; position: relative; overflow: hidden;
         }
-        .step-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            border-color: #ddd;
-        }
-        
+        .step-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: #ddd; }
         .step-number {
-            background: var(--black); color: var(--white); width: 40px; height: 40px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: 700; margin-bottom: 1.5rem; font-size: 1.1rem;
-        }
-        .step-card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; font-weight: 700; }
-        .step-card p { color: var(--text-grey); font-size: 1rem; line-height: 1.6; }
-
-        /* --- PRIVACY SECTION --- */
-        .privacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-        .privacy-card {
-            border: 1px solid var(--grey-border); border-radius: var(--radius);
-            padding: 3.5rem; background: #FAFAFA; transition: all 0.3s;
-        }
-        .privacy-card:hover { background: var(--white); box-shadow: var(--shadow-lg); }
-
-        .privacy-list li {
-            margin-bottom: 1.2rem; color: var(--text-grey); list-style: none;
-            position: relative; padding-left: 2rem; font-size: 1.05rem;
-        }
-        .privacy-list li::before {
-            content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900;
-            position: absolute; left: 0; top: 2px; color: var(--black); font-size: 0.9rem;
+            background: var(--black); color: var(--white); width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 1.5rem;
         }
 
         /* --- WAITLIST FORM --- */
         .waitlist-bg { background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%); border-top: 1px solid #eee; border-bottom: 1px solid #eee;}
         .waitlist-container {
-            border: 1px solid var(--grey-border); border-radius: 24px; padding: 4rem;
-            max-width: 700px; margin: 0 auto; background: var(--white);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.08); position: relative;
+            border: 1px solid var(--grey-border); border-radius: 24px; padding: 4rem; max-width: 700px; margin: 0 auto;
+            background: var(--white); box-shadow: 0 30px 60px rgba(0,0,0,0.08); position: relative;
         }
         
         .form-control {
-            width: 100%; padding: 1rem 1.2rem; border: 1px solid var(--grey-border);
-            border-radius: 12px; font-size: 1rem; transition: all 0.2s; background: #fcfcfc;
+            width: 100%; padding: 1rem 1.2rem; border: 1px solid var(--grey-border); border-radius: 12px; font-size: 1rem;
+            transition: all 0.2s; background: #fcfcfc; margin-bottom: 1.5rem;
         }
         .form-control:focus { outline: none; border-color: var(--black); background: #fff; box-shadow: 0 0 0 4px rgba(0,0,0,0.05); }
+        .form-label { display:block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; }
 
         .btn-full {
-            width: 100%; padding: 1.2rem; background: var(--black); color: var(--white);
-            border: none; border-radius: 12px; font-weight: 700; font-size: 1.1rem;
-            cursor: pointer; transition: all 0.3s; margin-top: 1rem;
+            width: 100%; padding: 1.2rem; background: var(--black); color: var(--white); border: none; border-radius: 12px;
+            font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;
         }
         .btn-full:hover { transform: scale(1.01); background: #222; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .btn-full:disabled { background: #999; cursor: not-allowed; }
 
-        /* --- FAQ (Accordion) --- */
+        /* --- FAQ --- */
         .faq-item {
-            border: 1px solid var(--grey-border); border-radius: 16px; margin-bottom: 1rem;
-            padding: 1.5rem 2rem; cursor: pointer; display: flex; justify-content: space-between;
-            align-items: center; transition: all 0.3s; background: white;
+            border: 1px solid var(--grey-border); border-radius: 16px; margin-bottom: 1rem; padding: 1.5rem 2rem;
+            background: white; transition: all 0.3s;
         }
-        .faq-item:hover { transform: translateX(5px); border-color: #000; }
-        .faq-item i { transition: transform 0.3s; }
-        .faq-item:hover i { transform: rotate(90deg); }
+        .faq-item h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .faq-item p { color: var(--text-grey); font-size: 0.95rem; line-height: 1.6; }
+
+        /* --- COMPLAINTS SECTION --- */
+        .complaints-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+        .danger-box {
+            background: var(--danger-bg); border: 1px solid var(--danger-border); border-radius: 12px; padding: 1.5rem;
+            margin-top: 1.5rem; color: var(--danger-text); font-size: 0.95rem;
+        }
+        .complaints-card {
+            border: 1px solid var(--grey-border); border-radius: 20px; padding: 2.5rem; background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        textarea.form-control { resize: vertical; min-height: 120px; }
 
         /* --- FOOTER --- */
         footer { padding: 5rem 5% 2rem; background: var(--white); border-top: 1px solid var(--grey-border); }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto; }
-        .copyright { text-align: center; margin-top: 5rem; color: #9CA3AF; font-size: 0.9rem; }
+        .footer-links li { margin-bottom: 0.8rem; list-style: none; }
+        .footer-links a { text-decoration: none; color: #666; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--black); }
 
         @media (max-width: 768px) {
-            .hero-grid, .privacy-grid, .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-grid, .complaints-wrapper, .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
             .hero-content { text-align: center; }
             .hero-content h1 { font-size: 3rem; }
-            .app-store-buttons { justify-content: center; }
-            .phone-mockup-container { margin-top: 3rem; }
             .nav-links { display: none; }
-            .waitlist-container { padding: 2rem; }
+            .phone-mockup-container { margin-top: 3rem; }
         }
     </style>
 </head>
@@ -263,8 +195,8 @@
         <div class="nav-links">
             <a href="#features">Features</a>
             <a href="#how-it-works">How it works</a>
-            <a href="#safety">Privacy</a>
             <a href="#faq">FAQ</a>
+            <a href="#complaints">Complaints</a>
         </div>
         <div class="nav-buttons">
             <a href="#" class="btn-small btn-outline">iOS</a>
@@ -277,58 +209,34 @@
             <div class="hero-content">
                 <h1>Less doomscrolling.<br>More real life.</h1>
                 <p>Junto is the privacy-first meetup app for friends. Post a plan, your friends tap Join, and you meet IRL. No background location. No endless feed. Just spontaneous time together.</p>
-                
-                <div class="app-store-buttons">
-                    <a href="#" class="store-btn"><i class="fab fa-apple" style="font-size: 1.2rem;"></i> App Store</a>
-                    <a href="#" class="store-btn"><i class="fab fa-google-play" style="font-size: 1.1rem;"></i> Google Play</a>
-                </div>
-
-                <div style="color: #6B7280; font-size: 0.95rem;">
-                    <p><i class="fas fa-check-circle" style="color: #050505; margin-right: 8px;"></i> Location shared only when you post</p>
-                    <p style="margin-top: 8px;"><i class="fas fa-check-circle" style="color: #050505; margin-right: 8px;"></i> Time-boxed invites that auto-expire</p>
+                <div style="display: flex; gap: 1rem; margin-bottom: 3rem; justify-content: flex-start;">
+                    <a href="#" class="store-btn"><i class="fab fa-apple"></i> App Store</a>
+                    <a href="#" class="store-btn"><i class="fab fa-google-play"></i> Google Play</a>
                 </div>
             </div>
 
             <div class="phone-mockup-container">
                 <div class="phone-mockup">
                     <div class="mockup-header">
-                        <h4>Junto</h4>
-                        <span class="tag">Alpha</span>
+                        <h4 style="font-weight: 800;">Junto</h4>
+                        <span style="background: #eee; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">Alpha</span>
                     </div>
                     <div class="mockup-card">
                         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                            <div>
-                                <strong style="font-size: 1.05rem;">Coffee @ Flagey</strong>
-                                <div style="font-size: 0.85rem; color: #666; margin-top: 4px;">Today • 17:00–19:00</div>
-                            </div>
+                            <div><strong>Coffee @ Flagey</strong><br><small style="color:#666">Today • 17:00–19:00</small></div>
                             <button class="join-btn-mock">Join</button>
-                        </div>
-                        <div style="font-size: 0.8rem; color: #999; margin-top: 10px; display: flex; gap: 5px; align-items: center;">
-                            <i class="fas fa-user-circle"></i> Rose, Sean, Enzo
                         </div>
                     </div>
                     <div class="mockup-card">
                         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                            <div>
-                                <strong style="font-size: 1.05rem;">Climbing • BLOCBX</strong>
-                                <div style="font-size: 0.85rem; color: #666; margin-top: 4px;">Sat • 14:30–16:00</div>
-                            </div>
+                            <div><strong>Climbing • BLOCBX</strong><br><small style="color:#666">Sat • 14:30–16:00</small></div>
                             <button class="join-btn-mock">Join</button>
-                        </div>
-                        <div style="font-size: 0.8rem; color: #999; margin-top: 10px; display: flex; gap: 5px; align-items: center;">
-                            <i class="fas fa-user-circle"></i> Gilles, Emma
                         </div>
                     </div>
                     <div class="mockup-card">
                         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                            <div>
-                                <strong style="font-size: 1.05rem;">After-work drinks</strong>
-                                <div style="font-size: 0.85rem; color: #666; margin-top: 4px;">Fri • 18:30–late</div>
-                            </div>
+                            <div><strong>After-work drinks</strong><br><small style="color:#666">Fri • 18:30–late</small></div>
                             <button class="join-btn-mock">Join</button>
-                        </div>
-                        <div style="font-size: 0.8rem; color: #999; margin-top: 10px; display: flex; gap: 5px; align-items: center;">
-                            <i class="fas fa-user-circle"></i> ULB friends
                         </div>
                     </div>
                 </div>
@@ -354,88 +262,46 @@
         </div>
     </section>
 
-    <section class="section" id="how-it-works">
-        <h2 class="section-title reveal">How it works</h2>
-        <div class="steps-grid">
-            <div class="step-card reveal">
-                <div class="step-number">1</div>
-                <h3>Post a plan</h3>
-                <p>Pick a place, set a window, and share with friends.</p>
-            </div>
-            <div class="step-card reveal" style="transition-delay: 100ms;">
-                <div class="step-number">2</div>
-                <h3>Friends tap Join</h3>
-                <p>They see your plan, choose to join, and optionally share ETA.</p>
-            </div>
-            <div class="step-card reveal" style="transition-delay: 200ms;">
-                <div class="step-number">3</div>
-                <h3>Meet IRL</h3>
-                <p>Maps opens with the venue. No chat chaos. No FOMO, just people.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="safety">
-        <h2 class="section-title reveal">Privacy & Safety</h2>
-        <div class="privacy-grid">
-            <div class="privacy-card reveal">
-                <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Your data, under your control</h3>
-                <ul class="privacy-list">
-                    <li>No background location: we access location only when you post.</li>
-                    <li>Time-boxed sharing: each post auto-expires.</li>
-                    <li>Clear visibility controls: friends and chosen circles only.</li>
-                    <li>No infinite feeds. No ads. No dark patterns.</li>
-                </ul>
-            </div>
-            <div class="privacy-card reveal" style="transition-delay: 100ms;">
-                <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Safety tools</h3>
-                <ul class="privacy-list">
-                    <li>Easy reporting for content or user behavior.</li>
-                    <li>Block and remove features to keep your space safe.</li>
-                    <li>Venue-partner escalation for onsite incidents.</li>
-                    <li>We review safety reports with care and urgency.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="section waitlist-bg">
+    <section class="section waitlist-bg" id="waiting-list">
         <div class="waitlist-container reveal">
             <h2 style="margin-bottom: 1rem; font-size: 2rem; text-align: center; font-weight: 800;">Join the waiting list</h2>
-            <p style="margin-bottom: 2.5rem; color: var(--text-grey); text-align: center;">We're rolling out first at universities in Brussels (ULB, VUB, USL-B), then expanding. Add your details to get notified.</p>
+            <p style="margin-bottom: 2.5rem; color: var(--text-grey); text-align: center;">We're rolling out first at universities in Brussels.</p>
             
-            <form>
-                <div style="margin-bottom: 1.5rem;">
-                    <label style="display:block; margin-bottom: 0.5rem; font-weight: 600;">Full name *</label>
-                    <input type="text" class="form-control" placeholder="Alex Example">
-                </div>
-                <div style="margin-bottom: 1.5rem;">
-                    <label style="display:block; margin-bottom: 0.5rem; font-weight: 600;">Email *</label>
-                    <input type="email" class="form-control" placeholder="you@university.be">
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <form name="submit-to-google-sheet-waitlist">
+                <input type="hidden" name="form_type" value="waitlist">
+                
+                <label class="form-label">Full name *</label>
+                <input type="text" name="full_name" class="form-control" placeholder="Alex Example" required>
+                
+                <label class="form-label">Email *</label>
+                <input type="email" name="email" class="form-control" placeholder="you@university.be" required>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div>
-                        <label style="display:block; margin-bottom: 0.5rem; font-weight: 600;">University</label>
-                        <select class="form-control">
+                        <label class="form-label">University</label>
+                        <select name="university" class="form-control">
                             <option>ULB</option>
                             <option>VUB</option>
                             <option>USL-B</option>
                         </select>
                     </div>
                     <div>
-                        <label style="display:block; margin-bottom: 0.5rem; font-weight: 600;">City</label>
-                        <select class="form-control">
+                        <label class="form-label">City</label>
+                        <select name="city" class="form-control">
                             <option>Brussels</option>
                             <option>Other</option>
                         </select>
                     </div>
                 </div>
+
                 <div style="margin-bottom: 1rem; display: flex; gap: 10px; align-items: start; font-size: 0.9rem; color: #666;">
-                    <input type="checkbox" id="consent" style="margin-top: 4px;">
-                    <label for="consent">I consent to the storage and processing of my data for the purpose of receiving Junto updates.</label>
+                    <input type="checkbox" id="consent" required style="margin-top: 4px;">
+                    <label for="consent">I consent to the processing of my data. See our <a href="https://docs.google.com/document/d/e/2PACX-1vR3jCmHco-cbrZOWXppVlFe84S82ihaRjvN0iZSdkC-ergi7BmoKlDaNgu17bnTN07kzrvSIrciewyc/pub" target="_blank" style="text-decoration: underline; color: inherit;">Privacy Policy</a>.</label>
                 </div>
-                <button type="button" class="btn-full">Join the waiting list</button>
+                
+                <button type="submit" class="btn-full">Join the waiting list</button>
             </form>
+            <p id="waitlist-msg" style="text-align:center; margin-top:1rem; display:none; color: green; font-weight: 600;">You're on the list! 🚀</p>
         </div>
     </section>
 
@@ -443,19 +309,68 @@
         <h2 class="section-title reveal">FAQ</h2>
         <div class="faq-item reveal">
             <h4>Is Junto free?</h4>
-            <i class="fas fa-plus"></i>
+            <p>Yes during the alpha. We’re exploring fair, transparent pricing for future venue-powered perks—never pay-to-be-seen social feeds.</p>
         </div>
         <div class="faq-item reveal">
             <h4>Do you track my location in the background?</h4>
-            <i class="fas fa-plus"></i>
+            <p>No. We only get location when you choose to post a plan. After expiry, it’s gone from your feed.</p>
         </div>
         <div class="faq-item reveal">
             <h4>Who can see my posts?</h4>
-            <i class="fas fa-plus"></i>
+            <p>Only your chosen circles—friends and the people you share with. Junto avoids public feeds by default.</p>
         </div>
         <div class="faq-item reveal">
             <h4>Where will you launch first?</h4>
-            <i class="fas fa-plus"></i>
+            <p>We’re starting at Brussels universities, then expanding city by city based on demand.</p>
+        </div>
+    </section>
+
+    <section class="section" id="complaints" style="background-color: #FAFAFA; border-top: 1px solid #eee;">
+        <div class="complaints-wrapper reveal">
+            
+            <div>
+                <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem;">Complaints & Safety reports</h2>
+                <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">
+                    Tell us if something's wrong: bugs, privacy concerns, harassment, venue issues, or anything else. For emergencies or danger, contact local authorities first.
+                </p>
+                <div class="danger-box">
+                    <strong>Immediate danger?</strong> Call local emergency services. We can't provide emergency assistance through this form.
+                </div>
+            </div>
+
+            <div class="complaints-card">
+                <form name="submit-to-google-sheet-complaint">
+                    <input type="hidden" name="form_type" value="complaint">
+
+                    <label class="form-label">Category *</label>
+                    <select name="category" class="form-control">
+                        <option>Bug Report</option>
+                        <option>Privacy Concern</option>
+                        <option>Harassment/Safety</option>
+                        <option>Other</option>
+                    </select>
+
+                    <label class="form-label">Subject *</label>
+                    <input type="text" name="subject" class="form-control" placeholder="Short summary" required>
+
+                    <label class="form-label">Details *</label>
+                    <textarea name="details" class="form-control" placeholder="Describe what happened, where, and when..." required></textarea>
+
+                    <label class="form-label">Your email (optional)</label>
+                    <input type="email" name="email" class="form-control" placeholder="For follow-up only">
+
+                    <label class="form-label" style="opacity: 0.5;">Attachment (Not available in Alpha)</label>
+                    <input type="text" class="form-control" placeholder="Paste a link to image/video if needed" disabled style="opacity: 0.5; background: #eee;">
+
+                    <div style="margin-bottom: 1rem; display: flex; gap: 10px; align-items: start; font-size: 0.9rem; color: #666;">
+                        <input type="checkbox" id="complaint-consent" required style="margin-top: 4px;">
+                        <label for="complaint-consent">I consent to processing my info according to the <a href="https://docs.google.com/document/d/e/2PACX-1vR3jCmHco-cbrZOWXppVlFe84S82ihaRjvN0iZSdkC-ergi7BmoKlDaNgu17bnTN07kzrvSIrciewyc/pub" target="_blank" style="text-decoration: underline; color: inherit;">Privacy Policy</a>.</label>
+                    </div>
+
+                    <button type="submit" class="btn-full" style="background: #111;">Send report</button>
+                </form>
+                <p id="complaint-msg" style="text-align:center; margin-top:1rem; display:none; color: green; font-weight: 600;">Report sent. Thank you.</p>
+            </div>
         </div>
     </section>
 
@@ -467,56 +382,116 @@
                     Junto
                 </a>
                 <p style="color: var(--text-grey); font-size: 0.95rem; line-height: 1.6;">The anti-social social app.<br>Less screen time, more real time.</p>
+                
                 <div style="margin-top: 1.5rem; display: flex; gap: 15px;">
-                    <a href="#" style="color: var(--black); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
-                    <a href="#" style="color: var(--black); font-size: 1.2rem;"><i class="fab fa-tiktok"></i></a>
-                    <a href="#" style="color: var(--black); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/juntosocials" target="_blank" style="color: var(--black); font-size: 1.4rem;"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/juntosocials/" target="_blank" style="color: var(--black); font-size: 1.4rem;"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
             <div>
                 <h5 style="font-weight: 700; margin-bottom: 1.2rem;">Product</h5>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="text-decoration: none; color: #666;">Features</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="text-decoration: none; color: #666;">How it works</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="text-decoration: none; color: #666;">Privacy</a></li>
+                <ul class="footer-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How it works</a></li>
+                    <li><a href="#safety">Privacy</a></li>
                 </ul>
             </div>
             <div>
                 <h5 style="font-weight: 700; margin-bottom: 1.2rem;">Company</h5>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="text-decoration: none; color: #666;">Waiting list</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="text-decoration: none; color: #666;">Complaints</a></li>
+                <ul class="footer-links">
+                    <li><a href="#waiting-list">Waiting list</a></li>
+                    <li><a href="#complaints">Complaints</a></li>
                 </ul>
             </div>
             <div>
                 <h5 style="font-weight: 700; margin-bottom: 1.2rem;">Legal</h5>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="text-decoration: none; color: #666;">Privacy Policy</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="text-decoration: none; color: #666;">Terms of Use</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="text-decoration: none; color: #666;">Safety</a></li>
+                <ul class="footer-links">
+                    <li><a href="https://docs.google.com/document/d/e/2PACX-1vR3jCmHco-cbrZOWXppVlFe84S82ihaRjvN0iZSdkC-ergi7BmoKlDaNgu17bnTN07kzrvSIrciewyc/pub" target="_blank">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Safety</a></li>
                 </ul>
             </div>
         </div>
-        <div class="copyright">
+        <div style="text-align: center; margin-top: 4rem; color: #9CA3AF; font-size: 0.85rem;">
             &copy; 2026 Junto. All rights reserved.
         </div>
     </footer>
 
     <script>
+        // Scroll Animation
         window.addEventListener('scroll', reveal);
         function reveal() {
             var reveals = document.querySelectorAll('.reveal');
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
+                if (elementTop < windowHeight - 100) {
                     reveals[i].classList.add('active');
                 }
             }
         }
-        // Trigger once on load
-        reveal();
+        reveal(); // Trigger once on load
+
+        // --- FORM HANDLING SCRIPT ---
+        
+        // YOUR GOOGLE APPS SCRIPT URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyKCDt37Xc5R8g7jziNJX0Tb7mWAqGwEW5jRrQzfd2O7Yywze9Qr7oQHbVyWBLi7p-7pQ/exec';
+
+        // Handle Waitlist Form
+        const formWaitlist = document.forms['submit-to-google-sheet-waitlist'];
+        const msgWaitlist = document.getElementById('waitlist-msg');
+
+        if(formWaitlist) {
+            formWaitlist.addEventListener('submit', e => {
+                e.preventDefault();
+                const btn = formWaitlist.querySelector('button');
+                const originalText = btn.innerText;
+                btn.innerText = 'Sending...';
+                btn.disabled = true;
+
+                fetch(scriptURL, { method: 'POST', body: new FormData(formWaitlist)})
+                    .then(response => {
+                        msgWaitlist.style.display = 'block';
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                        formWaitlist.reset();
+                        setTimeout(() => { msgWaitlist.style.display = 'none'; }, 5000);
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        btn.innerText = 'Error! Try again.';
+                        btn.disabled = false;
+                    });
+            });
+        }
+
+        // Handle Complaint Form
+        const formComplaint = document.forms['submit-to-google-sheet-complaint'];
+        const msgComplaint = document.getElementById('complaint-msg');
+
+        if(formComplaint) {
+            formComplaint.addEventListener('submit', e => {
+                e.preventDefault();
+                const btn = formComplaint.querySelector('button');
+                const originalText = btn.innerText;
+                btn.innerText = 'Sending...';
+                btn.disabled = true;
+
+                fetch(scriptURL, { method: 'POST', body: new FormData(formComplaint)})
+                    .then(response => {
+                        msgComplaint.style.display = 'block';
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                        formComplaint.reset();
+                        setTimeout(() => { msgComplaint.style.display = 'none'; }, 5000);
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        btn.innerText = 'Error! Try again.';
+                        btn.disabled = false;
+                    });
+            });
+        }
     </script>
 
 </body>
