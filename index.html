@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Junto | Keep It Spontaneous</title>
+    
+    <link rel="icon" href="https://imgur.com/undefined">
+
     <style>
         /* --- CSS Reset & Variables --- */
         :root {
             --bg-color: #0f0f0f;
             --text-color: #ffffff;
-            --accent-color: #ff6b35; /* Orange accent inferred from "Highlights" context */
+            --accent-color: #ff6b35; 
             --secondary-bg: #1a1a1a;
             --gray-text: #a1a1a1;
             --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -80,6 +83,7 @@
         .btn-outline:hover {
             background-color: var(--text-color);
             color: var(--bg-color);
+            border-color: var(--text-color);
         }
 
         /* --- Navigation --- */
@@ -94,10 +98,12 @@
             z-index: 10;
         }
 
-        .nav-logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            font-style: italic; /* Mimicking the logo style */
+        /* Updated Logo Styles */
+        .nav-logo-img {
+            height: 50px; /* Adjust height to fit navbar */
+            width: auto;
+            object-fit: contain;
+            display: block;
         }
 
         .nav-links {
@@ -109,12 +115,12 @@
 
         /* --- Hero Section --- */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 80px;
+            padding-top: 100px; /* Added extra padding for navbar clearance */
         }
 
         .hero-content {
@@ -260,7 +266,8 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .feature { flex-direction: column !important; text-align: center; }
-            .nav-links { display: none; } /* Simplified for this snippet */
+            .nav-links { display: none; } 
+            .waitlist-form input { width: 100%; margin-bottom: 10px; }
         }
     </style>
 </head>
@@ -268,7 +275,10 @@
 
     <div class="container">
         <nav>
-            <div class="nav-logo">Junto</div>
+            <a href="#">
+                <img src="https://imgur.com/undefined" alt="Junto Logo" class="nav-logo-img">
+            </a>
+            
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#mission">Mission</a>
@@ -293,8 +303,8 @@
         <div class="feature">
             <div class="feature-text">
                 <h2>Your Circles, Your Rules.</h2>
-                <p>Create custom circles for different groups of friends and set personalized notifications based on what you want.</p>
-                <p>Whether it's your gym buddy or your favorite crew for happy hour, choose to get notified based on interests or when they're at specific venues you love.</p>
+                [cite_start]<p>Create custom circles for different groups of friends and set personalized notifications based on what you want[cite: 95].</p>
+                [cite_start]<p>Whether it's your gym buddy or your favorite crew for happy hour, choose to get notified based on interests or when they're at specific venues you love[cite: 96].</p>
             </div>
             <div class="feature-img">
                 <img src="https://placehold.co/400x800/1a1a1a/FFF?text=Circles+UI" alt="Circles Feature">
@@ -306,8 +316,8 @@
         <div class="feature">
             <div class="feature-text">
                 <h2>Meet Up Freely, Share Selectively.</h2>
-                <p>Your location is shared only when it matters. We notify friends when you're at a venue, ready to meet up.</p>
-                <p>You're in control—no constant tracking, no unwanted sharing. Your privacy is as important to us as your spontaneous meet-ups.</p>
+                <p>Your location is shared only when it matters. [cite_start]We notify friends when you're at a venue, ready to meet up[cite: 181].</p>
+                <p>You're in control—no constant tracking, no unwanted sharing. [cite_start]Your privacy is as important to us as your spontaneous meet-ups[cite: 182].</p>
             </div>
             <div class="feature-img">
                 <img src="https://placehold.co/400x800/1a1a1a/FFF?text=Map+Privacy" alt="Map Privacy Feature">
@@ -319,8 +329,8 @@
         <div class="feature">
             <div class="feature-text">
                 <h2>Relive Your Adventures!</h2>
-                <p>See a snapshot of your social life! You can easily look back on your favorite moments.</p>
-                <p>Check out where you've been, who you've hung out with, and enjoy fun highlights like your go-to spots and how often you meet up with your partner-in-crime.</p>
+                <p>See a snapshot of your social life! [cite_start]You can easily look back on your favorite moments[cite: 217].</p>
+                [cite_start]<p>Check out where you've been, who you've hung out with, and enjoy fun highlights like your go-to spots and how often you meet up with your partner-in-crime[cite: 218].</p>
             </div>
             <div class="feature-img">
                 <img src="https://placehold.co/400x800/1a1a1a/FFF?text=Highlights+UI" alt="Highlights Feature">
@@ -331,15 +341,15 @@
     <section id="mission" class="mission">
         <div class="container mission-content">
             <h2>Be present, not online</h2>
-            <p>Junto helps you spend less time in group chats and more time making real memories with friends.</p>
-            <p>By sending quick notifications when friends are nearby, Junto brings authentic connections back to life—encouraging you to live in the moment and meet up in real life, just like friendship should be.</p>
+            [cite_start]<p>Junto helps you spend less time in group chats and more time making real memories with friends[cite: 324].</p>
+            [cite_start]<p>By sending quick notifications when friends are nearby, Junto brings authentic connections back to life—encouraging you to live in the moment and meet up in real life, just like friendship should be[cite: 325].</p>
         </div>
     </section>
 
     <section class="container">
         <div style="text-align: center; margin-bottom: 40px;">
             <h2>Meet The Team</h2>
-            <p>We're Gilles, Emma, and Ivan—three lifelong friends with a shared passion for living life to the fullest.</p>
+            [cite_start]<p>We're Gilles, Emma, and Ivan—three lifelong friends with a shared passion for living life to the fullest[cite: 639].</p>
         </div>
         <div class="team-grid">
             <div class="team-member">
@@ -359,7 +369,7 @@
             </div>
         </div>
         <p style="text-align: center; margin-top: 30px;">
-            At 24, we're all about staying active, exploring the world, and connecting with people. We created Junto to inspire real-life connections.
+            At 24, we're all about staying active, exploring the world, and connecting with people. [cite_start]We created Junto to inspire real-life connections[cite: 640, 641].
         </p>
     </section>
 
@@ -367,64 +377,64 @@
         <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
         <div class="faq-item">
             <div class="faq-question">How does Junto notify me when friends are nearby?</div>
-            <p>Junto sends you a simple notification when friends in your selected groups are close to your current location. It's not about live tracking; it's about helping you catch spontaneous opportunities.</p>
+            [cite_start]<p>Junto sends you a simple notification when friends in your selected groups are close to your current location[cite: 409]. [cite_start]It's not about live tracking; it's about helping you catch spontaneous opportunities[cite: 410].</p>
         </div>
         <div class="faq-item">
             <div class="faq-question">Does Junto track my live location all the time?</div>
-            <p>No, Junto does not track your live location. We prioritize your privacy. The app only uses location data to send notifications when you're near your friends, and we don't store real-time location info.</p>
+            <p>No, Junto does not track your live location. [cite_start]We prioritize your privacy[cite: 412]. [cite_start]The app only uses location data to send notifications when you're near your friends, and we don't store real-time location info[cite: 413].</p>
         </div>
         <div class="faq-item">
             <div class="faq-question">Can I choose who gets notified when I'm nearby?</div>
-            <p>Absolutely! You can create different groups within the app and set specific preferences for each group. You control who sees your status.</p>
+            <p>Absolutely! [cite_start]You can create different groups within the app and set specific preferences for each group[cite: 415]. [cite_start]You control who sees your status[cite: 416].</p>
         </div>
     </section>
 
     <section id="careers" class="careers">
         <div class="container">
             <h2>Careers at Junto</h2>
-            <p>Join our team in Flagey, Brussels. We're looking for like-minded, energetic individuals.</p>
+            [cite_start]<p>Join our team in Flagey, Brussels[cite: 376]. [cite_start]We're looking for like-minded, energetic individuals[cite: 643].</p>
             
             <div class="job-list">
                 <div class="job-card">
                     <h3>Community Manager Intern</h3>
-                    <p>Capture Junto's essence and convey it creatively on social media.</p>
+                    [cite_start]<p>Capture Junto's essence and convey it creatively on social media[cite: 359].</p>
                     <ul>
-                        <li>Create aesthetic, engaging content (TikTok/Instagram)</li>
-                        <li>Organize fun events and marketing campaigns</li>
-                        <li>Based in Brussels (Flagey)</li>
+                        [cite_start]<li>Create aesthetic, engaging content (TikTok/Instagram) [cite: 365, 372]</li>
+                        [cite_start]<li>Organize fun events and marketing campaigns [cite: 361]</li>
+                        [cite_start]<li>Based in Brussels (Flagey) [cite: 376]</li>
                     </ul>
                     <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply Now</a>
                 </div>
 
                 <div class="job-card">
                     <h3>Business Strategy Intern</h3>
-                    <p>Collaborate with the team to develop the app features and strategy.</p>
+                    [cite_start]<p>Collaborate with the team to develop the app features and strategy[cite: 588].</p>
                     <ul>
-                        <li>Help shape the future of Junto</li>
-                        <li>Creative problem solver & proactive</li>
-                        <li>Min. 3 months, 2 days/week</li>
+                        [cite_start]<li>Help shape the future of Junto [cite: 590]</li>
+                        [cite_start]<li>Creative problem solver & proactive [cite: 592, 595]</li>
+                        <li>Min. [cite_start]3 months, 2 days/week [cite: 605, 607]</li>
                     </ul>
                     <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply Now</a>
                 </div>
 
                 <div class="job-card">
                     <h3>App Developer Intern</h3>
-                    <p>Work on features, data security, database management, and API integration.</p>
+                    [cite_start]<p>Work on features, data security, database management, and API integration[cite: 803, 804].</p>
                     <ul>
-                        <li>Flutter, Kotlin, or Swift skills</li>
-                        <li>Knowledge of cybersecurity is a plus</li>
+                        [cite_start]<li>Flutter, Kotlin, or Swift skills [cite: 813]</li>
+                        [cite_start]<li>Knowledge of cybersecurity is a plus [cite: 814]</li>
                     </ul>
                     <a href="mailto:contact@juntosocials.com" class="btn btn-outline">Apply Now</a>
                 </div>
             </div>
-            <p style="text-align: center;">Send your CV and a short motivation to <strong>contact@juntosocials.com</strong></p>
+            [cite_start]<p style="text-align: center;">Send your CV and a short motivation to <strong>contact@juntosocials.com</strong> [cite: 869]</p>
         </div>
     </section>
 
     <footer id="waitlist">
         <div class="container">
             <h2>Catch up in real life</h2>
-            <p>Join the waitlist to get early access.</p>
+            [cite_start]<p>Join the waitlist to get early access[cite: 262].</p>
             <form class="waitlist-form" onsubmit="event.preventDefault(); alert('Thanks for joining!');">
                 <input type="email" placeholder="Email Address" required>
                 <button type="submit" class="btn">JOIN</button>
