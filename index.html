@@ -148,6 +148,17 @@
         }
         .btn-full:hover { transform: scale(1.01); background: #222; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
         .btn-full:disabled { background: #999; cursor: not-allowed; }
+        
+        /* Checkbox styling */
+        .device-checkbox-group {
+            display: flex; gap: 20px; margin-bottom: 1.5rem;
+        }
+        .device-option {
+            display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer;
+        }
+        .device-option input[type="radio"] {
+            transform: scale(1.2); cursor: pointer; accent-color: var(--black);
+        }
 
         /* --- FAQ --- */
         .faq-item {
@@ -276,6 +287,18 @@
                 <label class="form-label">Email *</label>
                 <input type="email" name="email" class="form-control" placeholder="you@university.be" required>
                 
+                <label class="form-label">Device *</label>
+                <div class="device-checkbox-group">
+                    <label class="device-option">
+                        <input type="radio" name="device" value="iOS" required>
+                        <i class="fab fa-apple"></i> iOS
+                    </label>
+                    <label class="device-option">
+                        <input type="radio" name="device" value="Android">
+                        <i class="fab fa-android"></i> Android
+                    </label>
+                </div>
+
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div>
                         <label class="form-label">University</label>
@@ -285,14 +308,15 @@
                             <option>USL-B</option>
                             <option value="Other">Other</option>
                         </select>
-                        <input type="text" id="uni-other-input" class="form-control" placeholder="Type your university name..." style="display:none; margin-top: -1rem; background: #FFF3CD;">
+                        <input type="text" id="uni-other-input" class="form-control" placeholder="Type university name..." style="display:none; margin-top: -1rem; background: #FFF3CD;">
                     </div>
                     <div>
                         <label class="form-label">City</label>
-                        <select name="city" class="form-control">
+                        <select name="city" id="city-select" class="form-control">
                             <option>Brussels</option>
-                            <option>Other</option>
+                            <option value="Other">Other</option>
                         </select>
+                        <input type="text" id="city-other-input" class="form-control" placeholder="Type city name..." style="display:none; margin-top: -1rem; background: #FFF3CD;">
                     </div>
                 </div>
 
@@ -443,12 +467,29 @@
                 if(this.value === 'Other') {
                     uniOtherInput.style.display = 'block';
                     uniOtherInput.required = true;
-                    // Auto-focus on the input for better UX
                     setTimeout(() => uniOtherInput.focus(), 100);
                 } else {
                     uniOtherInput.style.display = 'none';
                     uniOtherInput.required = false;
-                    uniOtherInput.value = ''; // Reset if they switch back
+                    uniOtherInput.value = ''; 
+                }
+            });
+        }
+
+        // --- CITY "OTHER" LOGIC ---
+        const citySelect = document.getElementById('city-select');
+        const cityOtherInput = document.getElementById('city-other-input');
+
+        if(citySelect && cityOtherInput) {
+            citySelect.addEventListener('change', function() {
+                if(this.value === 'Other') {
+                    cityOtherInput.style.display = 'block';
+                    cityOtherInput.required = true;
+                    setTimeout(() => cityOtherInput.focus(), 100);
+                } else {
+                    cityOtherInput.style.display = 'none';
+                    cityOtherInput.required = false;
+                    cityOtherInput.value = ''; 
                 }
             });
         }
@@ -470,10 +511,16 @@
                 btn.innerText = 'Sending...';
                 btn.disabled = true;
 
-                // SPECIAL HANDLING: If "Other" is selected, use the text input value for 'university'
                 const formData = new FormData(formWaitlist);
-                if (uniSelect.value === 'Other') {
+                
+                // If University "Other" is selected, overwrite with typed input
+                if (uniSelect && uniSelect.value === 'Other') {
                     formData.set('university', uniOtherInput.value);
+                }
+
+                // If City "Other" is selected, overwrite with typed input
+                if (citySelect && citySelect.value === 'Other') {
+                    formData.set('city', cityOtherInput.value);
                 }
 
                 fetch(scriptURL, { method: 'POST', body: formData})
@@ -482,8 +529,9 @@
                         btn.innerText = originalText;
                         btn.disabled = false;
                         formWaitlist.reset();
-                        // Reset the "Other" field visibility
+                        // Reset visibility of "Other" inputs
                         if(uniOtherInput) uniOtherInput.style.display = 'none';
+                        if(cityOtherInput) cityOtherInput.style.display = 'none';
                         setTimeout(() => { msgWaitlist.style.display = 'none'; }, 5000);
                     })
                     .catch(error => {
