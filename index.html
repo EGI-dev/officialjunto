@@ -279,11 +279,13 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div>
                         <label class="form-label">University</label>
-                        <select name="university" class="form-control">
+                        <select name="university" id="uni-select" class="form-control">
                             <option>ULB</option>
                             <option>VUB</option>
                             <option>USL-B</option>
+                            <option value="Other">Other</option>
                         </select>
+                        <input type="text" id="uni-other-input" class="form-control" placeholder="Type your university name..." style="display:none; margin-top: -1rem; background: #FFF3CD;">
                     </div>
                     <div>
                         <label class="form-label">City</label>
@@ -432,9 +434,28 @@
         }
         reveal(); // Trigger once on load
 
+        // --- UNIVERSITY "OTHER" LOGIC ---
+        const uniSelect = document.getElementById('uni-select');
+        const uniOtherInput = document.getElementById('uni-other-input');
+
+        if(uniSelect && uniOtherInput) {
+            uniSelect.addEventListener('change', function() {
+                if(this.value === 'Other') {
+                    uniOtherInput.style.display = 'block';
+                    uniOtherInput.required = true;
+                    // Auto-focus on the input for better UX
+                    setTimeout(() => uniOtherInput.focus(), 100);
+                } else {
+                    uniOtherInput.style.display = 'none';
+                    uniOtherInput.required = false;
+                    uniOtherInput.value = ''; // Reset if they switch back
+                }
+            });
+        }
+
         // --- FORM HANDLING SCRIPT ---
         
-        // YOUR GOOGLE APPS SCRIPT URL
+        // YOUR CONNECTED GOOGLE APPS SCRIPT URL
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyKCDt37Xc5R8g7jziNJX0Tb7mWAqGwEW5jRrQzfd2O7Yywze9Qr7oQHbVyWBLi7p-7pQ/exec';
 
         // Handle Waitlist Form
@@ -449,12 +470,20 @@
                 btn.innerText = 'Sending...';
                 btn.disabled = true;
 
-                fetch(scriptURL, { method: 'POST', body: new FormData(formWaitlist)})
+                // SPECIAL HANDLING: If "Other" is selected, use the text input value for 'university'
+                const formData = new FormData(formWaitlist);
+                if (uniSelect.value === 'Other') {
+                    formData.set('university', uniOtherInput.value);
+                }
+
+                fetch(scriptURL, { method: 'POST', body: formData})
                     .then(response => {
                         msgWaitlist.style.display = 'block';
                         btn.innerText = originalText;
                         btn.disabled = false;
                         formWaitlist.reset();
+                        // Reset the "Other" field visibility
+                        if(uniOtherInput) uniOtherInput.style.display = 'none';
                         setTimeout(() => { msgWaitlist.style.display = 'none'; }, 5000);
                     })
                     .catch(error => {
